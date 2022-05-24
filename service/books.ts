@@ -23,3 +23,11 @@ export const createBook = async (book: Book) => {
   })
   return response.json()
 }
+
+export const removeBook = async (id: string) => {
+  const response = await fetch(`${baseURL}/${id}`, {
+    method: "DELETE",
+    headers,
+  })
+  return response.json()
+}
