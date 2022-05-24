@@ -11,7 +11,6 @@ const headers = {
 export const getBooks = async (): Promise<Book[]> => {
   const response = await fetch(baseURL, { headers })
   const books = await response.json()
-  console.log("books", books)
   return books
 }
 
