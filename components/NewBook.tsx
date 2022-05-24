@@ -7,7 +7,6 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/react"
 import { Form, FormikProvider, useFormik } from "formik"
 import FormInput from "./FormInput"
@@ -16,6 +15,7 @@ import * as Yup from "yup"
 import { Book } from "../types/book"
 import { useMutation } from "react-query"
 import { createBook } from "../service/books"
+import useToast from "../hooks/useToast"
 
 const initialValues: Book = {
   title: "",
@@ -34,11 +34,7 @@ const validationSchema = Yup.object({
 const NewBookModal = () => {
   const { isOpen, onClose } = useDisclosure()
 
-  const toast = useToast({
-    duration: 2000,
-    position: "top",
-    variant: "subtle",
-  })
+  const toast = useToast()
 
   const mutation = useMutation(createBook, {
     onSuccess: () => {
