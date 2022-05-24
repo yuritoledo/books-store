@@ -1,5 +1,6 @@
 import {
   Button,
+  Heading,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -78,12 +79,14 @@ const NewBookModal = (props: Props) => {
   })
 
   return (
-    <Modal isOpen={isOpen} onClose={onCloseModal}>
+    <Modal isOpen={isOpen} onClose={onCloseModal} size="full">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add a new book</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
+        <ModalHeader w="560px" alignSelf="center">
+          <Heading fontSize="42px">Add a new book</Heading>
+          <ModalCloseButton />
+        </ModalHeader>
+        <ModalBody w="560px" alignSelf="center">
           <FormikProvider value={form}>
             <Form>
               <FormInput label="Title" name="title" />
