@@ -1,4 +1,4 @@
-import { Book } from "../pages"
+import { Book } from "../types/book"
 
 const baseURL =
   "https://us-central1-all-turtles-interview.cloudfunctions.net/books"
