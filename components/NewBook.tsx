@@ -6,14 +6,13 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
 } from "@chakra-ui/react"
 import { Form, FormikProvider, useFormik } from "formik"
 import FormInput from "./FormInput"
 import FormTextarea from "./FormTextArea"
 import * as Yup from "yup"
 import { Book } from "../types/book"
-import { useMutation } from "react-query"
+import { useMutation, useQueryClient } from "react-query"
 import { createBook } from "../service/books"
 import useToast from "../hooks/useToast"
 
@@ -31,18 +30,25 @@ const validationSchema = Yup.object({
   imageUrl: Yup.string().trim().required("Image URL is required"),
 })
 
-const NewBookModal = () => {
-  const { isOpen, onClose } = useDisclosure()
+type Props = {
+  isOpen: boolean
+  onClose(): void
+}
+
+const NewBookModal = (props: Props) => {
+  const { isOpen, onClose } = props
 
   const toast = useToast()
+  const queryClient = useQueryClient()
 
   const mutation = useMutation(createBook, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      queryClient.setQueryData("books", data)
       toast({
         title: "Book created! 🎉",
         status: "success",
       })
-      onClose()
+      onCloseModal()
     },
     onError: () => {
       toast({
@@ -51,6 +57,11 @@ const NewBookModal = () => {
       })
     },
   })
+
+  const onCloseModal = () => {
+    form.resetForm()
+    onClose()
+  }
 
   const onSubmit = (values: Book) => {
     mutation.mutate({
@@ -67,7 +78,7 @@ const NewBookModal = () => {
   })
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onCloseModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add a new book</ModalHeader>
