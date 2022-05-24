@@ -58,7 +58,7 @@ const BooksList = () => {
                 aria-label="Remove book"
                 bg="transparent"
                 isLoading={mutation.isLoading && book.id === selectedId.current}
-                onClick={() => onClickRemove(book.id)}
+                onClick={() => onClickRemove(book.id!)}
                 icon={<IoTrash size="30px" color="#929292" />}
               />
             </HStack>
