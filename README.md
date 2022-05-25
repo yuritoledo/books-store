@@ -21,3 +21,7 @@ Then run it:
 ```bash
 yarn dev
 ```
+
+## Video explaning the application!
+
+[See here!](https://ooo.mmhmm.app/z_Gjv8LvRLMKKfz5NQVwzK)
