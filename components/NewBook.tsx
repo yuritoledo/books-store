@@ -65,10 +65,7 @@ const NewBookModal = (props: Props) => {
   }
 
   const onSubmit = (values: Book) => {
-    mutation.mutate({
-      ...values,
-      imageUrl: "https://picsum.photos/125/200",
-    })
+    mutation.mutate(values)
   }
 
   const form = useFormik({
